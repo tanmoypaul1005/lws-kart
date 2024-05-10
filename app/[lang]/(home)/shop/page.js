@@ -2,7 +2,7 @@ import ProductCard from "@/components/ProductCard";
 
 const Shop = () => {
   return (
-    <body>
+    <div>
       <div className="container py-4 flex items-center gap-3">
         <a href="../index.html" className="text-primary text-base">
           <i className="fa-solid fa-house"></i>
@@ -380,7 +380,7 @@ const Shop = () => {
           </div>
         </div>
       </div>
-    </body>
+    </div>
   );
 };
 

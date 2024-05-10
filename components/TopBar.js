@@ -1,13 +1,14 @@
 import Image from 'next/image';
 import logo from '../public/images/logo.svg';
+import Link from 'next/link';
 
 const TopBar = () => {
     return (
-        <header className="py-4 shadow-sm bg-white">
+        <div className="py-4 shadow-sm bg-white">
         <div className="container flex items-center justify-between">
-          <a href="index.html">
+          <Link href="/">
             <Image src={logo} alt="Logo" className="w-32" />
-          </a>
+          </Link>
 
           <div className="w-full max-w-xl relative flex">
             <span className="absolute left-4 top-3 text-lg text-gray-400">
@@ -61,7 +62,7 @@ const TopBar = () => {
             </a>
           </div>
         </div>
-      </header>
+      </div>
     )
 }
 
