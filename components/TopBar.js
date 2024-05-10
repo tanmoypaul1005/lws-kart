@@ -1,11 +1,12 @@
-import React from 'react'
+import Image from 'next/image';
+import logo from '../public/images/logo.svg';
 
 const TopBar = () => {
     return (
         <header className="py-4 shadow-sm bg-white">
         <div className="container flex items-center justify-between">
           <a href="index.html">
-            <img src="assets/images/logo.svg" alt="Logo" className="w-32" />
+            <Image src={logo} alt="Logo" className="w-32" />
           </a>
 
           <div className="w-full max-w-xl relative flex">
