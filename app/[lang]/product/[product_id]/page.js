@@ -1,7 +1,8 @@
 import NavBar from "@/components/NavBar";
 import ProductCard from "@/components/ProductCard";
 import TopBar from "@/components/TopBar";
-import React from "react";
+import product1 from "../../../../public/images/products/product1.jpg";
+import Image from "next/image";
 
 const ProductDetails = () => {
   return (
@@ -21,34 +22,30 @@ const ProductDetails = () => {
 
       <div className="container grid grid-cols-2 gap-6">
         <div>
-          <img
-            src="../assets/images/products/product1.jpg"
-            alt="product"
-            className="w-full"
-          />
+          <Image src={product1} alt="product" className="w-full" />
           <div className="grid grid-cols-5 gap-4 mt-4">
-            <img
-              src="../assets/images/products/product2.jpg"
+            <Image
+              src={product1}
               alt="product2"
               className="w-full cursor-pointer border border-primary"
             />
-            <img
-              src="../assets/images/products/product3.jpg"
+            <Image
+              src={product1}
               alt="product2"
               className="w-full cursor-pointer border"
             />
-            <img
-              src="../assets/images/products/product4.jpg"
+            <Image
+              src={product1}
               alt="product2"
               className="w-full cursor-pointer border"
             />
-            <img
-              src="../assets/images/products/product5.jpg"
+            <Image
+              src={product1}
               alt="product2"
               className="w-full cursor-pointer border"
             />
-            <img
-              src="../assets/images/products/product6.jpg"
+            <Image
+              src={product1}
               alt="product2"
               className="w-full cursor-pointer border"
             />
