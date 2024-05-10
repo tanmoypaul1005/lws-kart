@@ -1,4 +1,3 @@
-import React from 'react';
 import category1 from '../../public/images/category/category-1.jpg';
 import category2 from '../../public/images/category/category-2.jpg';
 import category3 from '../../public/images/category/category-3.jpg';
