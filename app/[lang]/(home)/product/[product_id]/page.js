@@ -1,15 +1,10 @@
-import NavBar from "@/components/NavBar";
 import ProductCard from "@/components/ProductCard";
-import TopBar from "@/components/TopBar";
-import product1 from "../../../../public/images/products/product1.jpg";
+import product1 from "../../../../../public/images/products/product1.jpg";
 import Image from "next/image";
 
 const ProductDetails = () => {
   return (
-    <body>
-      <TopBar />
-      <NavBar />
-
+    <div>
       <div className="container py-4 flex items-center gap-3">
         <a href="../index.html" className="text-primary text-base">
           <i className="fa-solid fa-house"></i>
@@ -198,7 +193,7 @@ const ProductDetails = () => {
           <ProductCard />
         </div>
       </div>
-    </body>
+    </div>
   );
 };
 
