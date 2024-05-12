@@ -20,4 +20,4 @@ const userSchema = new Schema({
 });
 
 
-export const userModel = mongoose.models.user ?? mongoose.model("user", userSchema);
+export const User = mongoose.models.  User ?? mongoose.model("User", userSchema);
