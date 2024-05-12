@@ -1,6 +1,7 @@
 import mongoose, {Schema} from "mongoose";
 
 const productSchema = new Schema({
+  
   title: {
     required: true,
     type: String
@@ -24,7 +25,24 @@ const productSchema = new Schema({
   sku: {
     required: false,
     type: String
+  },
+  quantity:{
+    required: false,
+    type: Number
+  },
+  description :{
+    required: false,
+    type: String
+  },
+  long_description :{
+    required: false,
+    type: String
+  },
+  images: {
+    required: false,
+    type: [String]
   }
+  
 });
 
 

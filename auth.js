@@ -1,16 +1,56 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import { User } from "./models/User";
+import CredentialsProvider from "next-auth/providers/credentials";
+import bcrypt from "bcrypt";
+import mongoClientPromise from "./utils/mongoClientPromise";
+import { MongoDBAdapter } from "@auth/mongodb-adapter";
 
 export const {
-    handlers: { GET, POST },
-    auth,
-    signIn,
-    signOut,
+  handlers: { GET, POST },
+  auth,
+  signIn,
+  signOut,
 } = NextAuth({
-    providers: [
-        GoogleProvider({
-            clientId: "801748148316-9dkco504uv7tjlh078dmqmbqh411rfbv.apps.googleusercontent.com",
-            clientSecret: "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AUTH_SECRET=b310c60e5f230b7ac5386932507b963d74d35dab15367a09fcb513f22fbac1a2",
-        })
-    ],
+  adapter: MongoDBAdapter(mongoClientPromise, {
+    databaseName: process.env.ENVIRONMENT,
+  }),
+  session: {
+    strategy: "jwt",
+  },
+  providers: [
+    CredentialsProvider({
+      credentials: {
+        email: {},
+        password: {},
+      },
+
+      async authorize(credentials) {
+        if (credentials == null) return null;
+        try {
+          const user = await User.findOne({ email: credentials.email });
+          console.log({ user });
+          if (user) {
+            const isMatch = await bcrypt.compare(
+              credentials.password,
+              user.password
+            );
+            if (isMatch) {
+              return user;
+            } else {
+              throw new Error("Email or password mismatch");
+            }
+          } else {
+            throw new Error("User not found");
+          }
+        } catch (error) {
+          throw new Error(error);
+        }
+      },
+    }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
+  ],
 });

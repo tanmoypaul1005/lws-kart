@@ -1,5 +1,4 @@
 "use client";
-
 import { signIn } from "next-auth/react";
 
 const Login = () => {
@@ -81,7 +80,7 @@ const Login = () => {
           <div
             onClick={async() => {
              await signIn("google", {
-                callbackUrl: "http://localhost:3000",
+                callbackUrl: "http://localhost:3000/en/product/1",
               });
             }}
             className="cursor-pointer w-1/2 py-2 text-center text-white bg-red-600 rounded uppercase font-roboto font-medium text-sm hover:bg-red-500"
