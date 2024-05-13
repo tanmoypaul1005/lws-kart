@@ -1,5 +1,3 @@
-"use client";
-import { signIn } from "next-auth/react";
 import LoginForm from "./components/LoginForm";
 import SocialLogin from "./components/SocialLogin";
 import Link from "next/link";

@@ -7,13 +7,16 @@ const LoginForm = () => {
     
   const router = useRouter();
   const [error, setError] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   async function onSubmit(event) {
     event.preventDefault();
 
     try {
-      const formData = new FormData(event.currentTarget);
-      const response = await login(formData);
+
+      console.log({ email, password })
+      const response = await login({ email, password });
       console.log(response);
       if (!!response.error) {
         setError(response.error);
@@ -38,6 +41,8 @@ const LoginForm = () => {
               type="email"
               name="email"
               id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
               required
               className="block w-full px-4 py-3 text-sm text-gray-600 placeholder-gray-400 border border-gray-300 rounded focus:ring-0 focus:border-primary"
               placeholder="youremail.@domain.com"
@@ -49,6 +54,8 @@ const LoginForm = () => {
             </label>
             <input
               required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               type="password"
               name="password"
               id="password"

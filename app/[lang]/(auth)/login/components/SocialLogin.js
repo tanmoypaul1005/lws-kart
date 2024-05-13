@@ -1,4 +1,5 @@
-
+"use client"
+import { signIn } from "next-auth/react";
 
 const SocialLogin = () => {
     return (
@@ -11,6 +12,7 @@ const SocialLogin = () => {
           </a>
           <div
             onClick={async () => {
+                console.log("google")
               await signIn("google", {
                 callbackUrl: "http://localhost:3000/en/product/1",
               });
