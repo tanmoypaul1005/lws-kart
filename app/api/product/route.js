@@ -1,3 +1,4 @@
+import Category from "@/models/Category";
 import { Product } from "@/models/Product";
 import { products_type } from "@/utils/const";
 import connectMongo from "@/utils/db";
@@ -21,13 +22,13 @@ export async function GET(request) {
           return Response.json({ success: false, status: 400, message: "Invalid type", data: null });
         }
     
-        // products = await Promise.all(products.map(async (product) => {
-        //   const category = await Category.findOne({ _id: product.category });
-        //   if (category) {
-        //     product.category = category;
-        //   }
-        //   return product;
-        // }));
+        products = await Promise.all(products.map(async (product) => {
+          const category = await Category.findOne({ _id: product.category });
+          if (category) {
+            product.category = category;
+          }
+          return product;
+        }));
         
         return Response.json({ status: 200, success: true, data: products, message: "Product is Found" });
       } catch (err) {
