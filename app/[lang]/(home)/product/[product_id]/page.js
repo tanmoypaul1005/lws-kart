@@ -1,18 +1,25 @@
 import ProductCard from "@/components/ProductCard";
 import product1 from "../../../../../public/images/products/product1.jpg";
 import Image from "next/image";
+import { base_url } from "@/utils/const";
+import { kuProductList } from "@/utils/url";
 
-const ProductDetails = () => {
+const ProductDetails = async({params}) => {
+
+  console.log("params",params?.product_id)
+
+  const products = await fetch(base_url + kuProductList+ `/${params?.product_id}`).then((res) => res.json());
+
   return (
     <div>
-      <div className="container py-4 flex items-center gap-3">
-        <a href="../index.html" className="text-primary text-base">
+      <div className="container flex items-center gap-3 py-4">
+        <a href="../index.html" className="text-base text-primary">
           <i className="fa-solid fa-house"></i>
         </a>
         <span className="text-sm text-gray-400">
           <i className="fa-solid fa-chevron-right"></i>
         </span>
-        <p className="text-gray-600 font-medium">Product</p>
+        <p className="font-medium text-gray-600">Product</p>
       </div>
 
       <div className="container grid grid-cols-2 gap-6">
@@ -22,33 +29,33 @@ const ProductDetails = () => {
             <Image
               src={product1}
               alt="product2"
-              className="w-full cursor-pointer border border-primary"
+              className="w-full border cursor-pointer border-primary"
             />
             <Image
               src={product1}
               alt="product2"
-              className="w-full cursor-pointer border"
+              className="w-full border cursor-pointer"
             />
             <Image
               src={product1}
               alt="product2"
-              className="w-full cursor-pointer border"
+              className="w-full border cursor-pointer"
             />
             <Image
               src={product1}
               alt="product2"
-              className="w-full cursor-pointer border"
+              className="w-full border cursor-pointer"
             />
             <Image
               src={product1}
               alt="product2"
-              className="w-full cursor-pointer border"
+              className="w-full border cursor-pointer"
             />
           </div>
         </div>
 
         <div>
-          <h2 className="text-3xl font-medium uppercase mb-2">
+          <h2 className="mb-2 text-3xl font-medium uppercase">
             Italian L Shape Sofa
           </h2>
           <div className="flex items-center mb-4">
@@ -69,28 +76,28 @@ const ProductDetails = () => {
                 <i className="fa-solid fa-star"></i>
               </span>
             </div>
-            <div className="text-xs text-gray-500 ml-3">(150 Reviews)</div>
+            <div className="ml-3 text-xs text-gray-500">(150 Reviews)</div>
           </div>
           <div className="space-y-2">
-            <p className="text-gray-800 font-semibold space-x-2">
+            <p className="space-x-2 font-semibold text-gray-800">
               <span>Availability: </span>
               <span className="text-green-600">In Stock</span>
             </p>
             <p className="space-x-2">
-              <span className="text-gray-800 font-semibold">Brand: </span>
+              <span className="font-semibold text-gray-800">Brand: </span>
               <span className="text-gray-600">Apex</span>
             </p>
             <p className="space-x-2">
-              <span className="text-gray-800 font-semibold">Category: </span>
+              <span className="font-semibold text-gray-800">Category: </span>
               <span className="text-gray-600">Sofa</span>
             </p>
             <p className="space-x-2">
-              <span className="text-gray-800 font-semibold">SKU: </span>
+              <span className="font-semibold text-gray-800">SKU: </span>
               <span className="text-gray-600">BE45VGRT</span>
             </p>
           </div>
-          <div className="flex items-baseline mb-1 space-x-2 font-roboto mt-4">
-            <p className="text-xl text-primary font-semibold">$45.00</p>
+          <div className="flex items-baseline mt-4 mb-1 space-x-2 font-roboto">
+            <p className="text-xl font-semibold text-primary">$45.00</p>
             <p className="text-base text-gray-400 line-through">$55.00</p>
           </div>
 
@@ -102,30 +109,30 @@ const ProductDetails = () => {
           </p>
 
           <div className="mt-4">
-            <h3 className="text-sm text-gray-800 uppercase mb-1">Quantity</h3>
-            <div className="flex border border-gray-300 text-gray-600 divide-x divide-gray-300 w-max">
-              <div className="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none">
+            <h3 className="mb-1 text-sm text-gray-800 uppercase">Quantity</h3>
+            <div className="flex text-gray-600 border border-gray-300 divide-x divide-gray-300 w-max">
+              <div className="flex items-center justify-center w-8 h-8 text-xl cursor-pointer select-none">
                 -
               </div>
-              <div className="h-8 w-8 text-base flex items-center justify-center">
+              <div className="flex items-center justify-center w-8 h-8 text-base">
                 4
               </div>
-              <div className="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none">
+              <div className="flex items-center justify-center w-8 h-8 text-xl cursor-pointer select-none">
                 +
               </div>
             </div>
           </div>
 
-          <div className="mt-6 flex gap-3 border-b border-gray-200 pb-5 pt-5">
+          <div className="flex gap-3 pt-5 pb-5 mt-6 border-b border-gray-200">
             <a
               href="#"
-              className="bg-primary border border-primary text-white px-8 py-2 font-medium rounded uppercase flex items-center gap-2 hover:bg-transparent hover:text-primary transition"
+              className="flex items-center gap-2 px-8 py-2 font-medium text-white uppercase transition border rounded bg-primary border-primary hover:bg-transparent hover:text-primary"
             >
               <i className="fa-solid fa-bag-shopping"></i> Add to cart
             </a>
             <a
               href="#"
-              className="border border-gray-300 text-gray-600 px-8 py-2 font-medium rounded uppercase flex items-center gap-2 hover:text-primary transition"
+              className="flex items-center gap-2 px-8 py-2 font-medium text-gray-600 uppercase transition border border-gray-300 rounded hover:text-primary"
             >
               <i className="fa-solid fa-heart"></i> Wishlist
             </a>
@@ -134,19 +141,19 @@ const ProductDetails = () => {
           <div className="flex gap-3 mt-4">
             <a
               href="#"
-              className="text-gray-400 hover:text-gray-500 h-8 w-8 rounded-full border border-gray-300 flex items-center justify-center"
+              className="flex items-center justify-center w-8 h-8 text-gray-400 border border-gray-300 rounded-full hover:text-gray-500"
             >
               <i className="fa-brands fa-facebook-f"></i>
             </a>
             <a
               href="#"
-              className="text-gray-400 hover:text-gray-500 h-8 w-8 rounded-full border border-gray-300 flex items-center justify-center"
+              className="flex items-center justify-center w-8 h-8 text-gray-400 border border-gray-300 rounded-full hover:text-gray-500"
             >
               <i className="fa-brands fa-twitter"></i>
             </a>
             <a
               href="#"
-              className="text-gray-400 hover:text-gray-500 h-8 w-8 rounded-full border border-gray-300 flex items-center justify-center"
+              className="flex items-center justify-center w-8 h-8 text-gray-400 border border-gray-300 rounded-full hover:text-gray-500"
             >
               <i className="fa-brands fa-instagram"></i>
             </a>
@@ -155,7 +162,7 @@ const ProductDetails = () => {
       </div>
 
       <div className="container pb-16">
-        <h3 className="border-b border-gray-200 font-roboto text-gray-800 pb-3 font-medium">
+        <h3 className="pb-3 font-medium text-gray-800 border-b border-gray-200 font-roboto">
           Product details
         </h3>
         <div className="w-3/5 pt-6">
@@ -183,7 +190,7 @@ const ProductDetails = () => {
       </div>
 
       <div className="container pb-16">
-        <h2 className="text-2xl font-medium text-gray-800 uppercase mb-6">
+        <h2 className="mb-6 text-2xl font-medium text-gray-800 uppercase">
           Related products
         </h2>
         <div className="grid grid-cols-4 gap-6">
