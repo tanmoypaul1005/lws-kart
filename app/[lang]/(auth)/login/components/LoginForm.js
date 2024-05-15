@@ -17,7 +17,7 @@ const LoginForm = () => {
 
       console.log({ email, password })
       const response = await login({ email, password });
-      console.log(response);
+      console.log("response",response);
       if (!!response.error) {
         setError(response.error);
       } else {
@@ -25,6 +25,7 @@ const LoginForm = () => {
       }
     } catch (err) {
       setError(err.message);
+      console.log("Error", err)
     }
   }
 

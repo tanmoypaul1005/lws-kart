@@ -11,6 +11,7 @@ export async function login(formData) {
         })
         return response;
     } catch(error) {
+        return{ error: error.message}
         // throw new Error(error);
         console.log("error: ", error)
     }
