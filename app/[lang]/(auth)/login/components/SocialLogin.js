@@ -1,15 +1,16 @@
 "use client"
 import { signIn } from "next-auth/react";
+import Link from "next/link";
 
 const SocialLogin = () => {
     return (
         <div className="flex gap-4 mt-4">
-          <a
-            href="#"
+          <Link
+            href="/"
             className="w-1/2 py-2 text-sm font-medium text-center text-white uppercase bg-blue-800 rounded font-roboto hover:bg-blue-700"
           >
             facebook
-          </a>
+          </Link>
           <div
             onClick={async () => {
                 console.log("google")
