@@ -1,9 +1,10 @@
 "use client";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { getCart } from "@/app/actions";
 import { Toastr } from "@/utils/utilityFunctions";
+import { CartContext } from "@/app/contexts";
 
 const Action = ({ product_id, session }) => {
   const [quantity, setQuantity] = useState(1);
@@ -17,6 +18,8 @@ const Action = ({ product_id, session }) => {
       setQuantity(quantity - 1);
     }
   };
+
+  const {totalCart, setTotalCart} = useContext(CartContext);
 
   const handleAddToCart = async () => {
     const email = session?.user?.email; // replace with your user id
@@ -37,7 +40,9 @@ const Action = ({ product_id, session }) => {
       console.log("data", data);
 
       if (response.success) {
-        await getCart(email);
+       const cart= await getCart(email);
+       setTotalCart(cart?.data?.length);
+        
         Toastr({ message: data.message, type: "success" });
       } else {
         Toastr({ message: data.message, type: "success" });
