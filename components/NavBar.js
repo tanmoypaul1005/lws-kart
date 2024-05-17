@@ -9,9 +9,10 @@ import Link from "next/link";
 import { auth } from "@/auth";
 
 const NavBar = async () => {
+  
   const session = await auth();
 
-  console.log("session", session);
+  // console.log("session", session);
 
   return (
     <nav className="bg-gray-800">

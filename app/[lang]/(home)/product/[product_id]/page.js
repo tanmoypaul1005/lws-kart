@@ -1,8 +1,12 @@
+export const revalidate = 10; // revalidate at most every hour
+
 import ProductCard from "@/components/ProductCard";
 import product1 from "../../../../../public/images/products/product1.jpg";
 import Image from "next/image";
 import { base_url } from "@/utils/const";
 import { kuProductList } from "@/utils/url";
+import Action from "./components/Action";
+import { auth } from "@/auth";
 
 const ProductDetails = async ({ params }) => {
   const product = await fetch(
@@ -11,7 +15,9 @@ const ProductDetails = async ({ params }) => {
 
   const productsDetails = product?.data;
 
-  console.log("productsDetails", productsDetails);
+  const session = await auth();
+
+  // console.log("productsDetails", productsDetails);
 
   return (
     <div>
@@ -92,7 +98,10 @@ const ProductDetails = async ({ params }) => {
             </p>
             <p className="space-x-2">
               <span className="font-semibold text-gray-800">Category: </span>
-              <span className="text-gray-600"> {productsDetails?.category}</span>
+              <span className="text-gray-600">
+                {" "}
+                {productsDetails?.category}
+              </span>
             </p>
             <p className="space-x-2">
               <span className="font-semibold text-gray-800">SKU: </span>
@@ -100,43 +109,17 @@ const ProductDetails = async ({ params }) => {
             </p>
           </div>
           <div className="flex items-baseline mt-4 mb-1 space-x-2 font-roboto">
-            <p className="text-xl font-semibold text-primary">$ {productsDetails?.price}</p>
-            <p className="text-base text-gray-400 line-through">$ {productsDetails?.price}</p>
+            <p className="text-xl font-semibold text-primary">
+              $ {productsDetails?.price}
+            </p>
+            <p className="text-base text-gray-400 line-through">
+              $ {productsDetails?.price}
+            </p>
           </div>
 
-          <p className="mt-4 text-gray-600">
-          {productsDetails?.description}
-          </p>
+          <p className="mt-4 text-gray-600">{productsDetails?.description}</p>
 
-          <div className="mt-4">
-            <h3 className="mb-1 text-sm text-gray-800 uppercase">Quantity</h3>
-            <div className="flex text-gray-600 border border-gray-300 divide-x divide-gray-300 w-max">
-              <div className="flex items-center justify-center w-8 h-8 text-xl cursor-pointer select-none">
-                -
-              </div>
-              <div className="flex items-center justify-center w-8 h-8 text-base">
-                4
-              </div>
-              <div className="flex items-center justify-center w-8 h-8 text-xl cursor-pointer select-none">
-                +
-              </div>
-            </div>
-          </div>
-
-          <div className="flex gap-3 pt-5 pb-5 mt-6 border-b border-gray-200">
-            <a
-              href="#"
-              className="flex items-center gap-2 px-8 py-2 font-medium text-white uppercase transition border rounded bg-primary border-primary hover:bg-transparent hover:text-primary"
-            >
-              <i className="fa-solid fa-bag-shopping"></i> Add to cart
-            </a>
-            <a
-              href="#"
-              className="flex items-center gap-2 px-8 py-2 font-medium text-gray-600 uppercase transition border border-gray-300 rounded hover:text-primary"
-            >
-              <i className="fa-solid fa-heart"></i> Wishlist
-            </a>
-          </div>
+          <Action session={session} product_id={params?.product_id}/>
 
           <div className="flex gap-3 mt-4">
             <a
@@ -167,24 +150,7 @@ const ProductDetails = async ({ params }) => {
         </h3>
         <div className="w-3/5 pt-6">
           <div className="text-gray-600">
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur
-              necessitatibus deleniti natus dolore cum maiores suscipit optio
-              itaque voluptatibus veritatis tempora iste facilis non aut
-              sapiente dolor quisquam, ex ab.
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum,
-              quae accusantium voluptatem blanditiis sapiente voluptatum. Autem
-              ab, dolorum assumenda earum veniam eius illo fugiat possimus illum
-              dolor totam, ducimus excepturi.
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Error
-              quia modi ut expedita! Iure molestiae labore cumque nobis quasi
-              fuga, quibusdam rem? Temporibus consectetur corrupti rerum
-              veritatis numquam labore amet.
-            </p>
+            {productsDetails?.long_description}
           </div>
         </div>
       </div>
@@ -194,10 +160,9 @@ const ProductDetails = async ({ params }) => {
           Related products
         </h2>
         <div className="grid grid-cols-4 gap-6">
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
+          {productsDetails?.related_products?.map((product) => (
+            <ProductCard key={product._id} product={product} />
+          ))}
         </div>
       </div>
     </div>

@@ -1,8 +1,16 @@
+// export const revalidate = 10; // revalidate at most every hour
+import { getCart } from '@/app/actions';
+import { auth } from '@/auth';
 import { iLogo } from '@/utils/imageImports';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const TopBar = () => {
+const TopBar = async() => {
+
+  const session = await auth();
+   const  cart = await getCart(session?.user?.email);
+
+
     return (
         <div className="py-4 shadow-sm bg-white">
         <div className="container flex items-center justify-between">
@@ -18,12 +26,12 @@ const TopBar = () => {
               type="text"
               name="search"
               id="search"
-              className="w-full border border-primary border-r-0 pl-12 py-3 pr-3 rounded-l-md focus:outline-none hidden md:flex"
+              className="w-full border border-primary  pl-3 py-3 pr-3 rounded focus:outline-none hidden md:flex"
               placeholder="search"
             />
-            <button className="bg-primary border border-primary text-white px-8 rounded-r-md hover:bg-transparent hover:text-primary transition hidden md:flex">
+            {/* <button className="bg-primary border border-primary text-white px-8 rounded-r-md hover:bg-transparent hover:text-primary transition hidden md:flex">
               Search
-            </button>
+            </button> */}
           </div>
 
           <div className="flex items-center space-x-4">
@@ -39,8 +47,8 @@ const TopBar = () => {
                 8
               </div>
             </a>
-            <a
-              href="#"
+            <Link
+              href="/en/cart"
               className="text-center text-gray-700 hover:text-primary transition relative"
             >
               <div className="text-2xl">
@@ -48,18 +56,21 @@ const TopBar = () => {
               </div>
               <div className="text-xs leading-3">Cart</div>
               <div className="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
-                2
+                {cart?.data?.length}
               </div>
-            </a>
-            <a
-              href="#"
+            </Link>
+
+
+            <Link 
+            href="/en/account"
+          
               className="text-center text-gray-700 hover:text-primary transition relative"
             >
               <div className="text-2xl">
                 <i className="fa-regular fa-user"></i>
               </div>
               <div className="text-xs leading-3">Account</div>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

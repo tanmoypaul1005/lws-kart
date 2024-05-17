@@ -2,6 +2,7 @@ import Banner from "@/components/home/Banner";
 import Category from "@/components/home/Category";
 import Features from "@/components/home/Features";
 import NewArrival from "@/components/home/NewArrival";
+import Trending from "@/components/home/Trending";
 import NavBar from "@/components/NavBar";
 
 import ProductCard from "@/components/ProductCard";
@@ -24,20 +25,7 @@ export default function Home() {
         </a>
       </div>
 
-      <div className="container pb-16">
-        <h2 className="mb-6 text-2xl font-medium text-gray-800 uppercase">
-          TRENDING PRODUCTS
-        </h2>
-        <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-        </div>
-      </div>
+      <Trending/>
     </main>
   );
 }

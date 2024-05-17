@@ -5,7 +5,7 @@ import React from "react";
 const ProductCard = ({product}) => {
   
   return (
-    <Link href={`/en/product/${product?.id}`} className="overflow-hidden bg-white rounded shadow group">
+    <Link href={`/en/product/${product?._id}`} className="overflow-hidden bg-white rounded shadow group">
       <div className="relative">
         <Image
           width={200}
