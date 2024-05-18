@@ -11,8 +11,6 @@ const TopBar = ({ session }) => {
 
   const { totalCart, setTotalCart } = useContext(CartContext);
 
-  console.log("session", session);
-
   useEffect(() => {
     fetchData();
   }, [totalCart]);

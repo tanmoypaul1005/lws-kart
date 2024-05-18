@@ -1,6 +1,19 @@
-const Checkout = () => {
+import { getCart } from "@/app/actions";
+import { auth } from "@/auth";
+
+const Checkout = async () => {
+  const session = await auth();
+
+  // console.log("session", session);
+
+  const cart = await getCart(session?.user?.email);
+
+  console.log("cart", cart);
+
+  const subTotal=cart?.data?.reduce((total, item) => total + item?.price * item?.quantity, 0)
+
   return (
-    <body>
+    <div>
       <div className="container py-4 flex items-center gap-3">
         <a href="../index.html" className="text-primary text-base">
           <i className="fa-solid fa-house"></i>
@@ -119,51 +132,25 @@ const Checkout = () => {
             order summary
           </h4>
           <div className="space-y-2">
-            <div className="flex justify-between">
-              <div>
-                <h5 className="text-gray-800 font-medium">
-                  Italian shape sofa
-                </h5>
-                <p className="text-sm text-gray-600">Size: M</p>
-              </div>
-              <p className="text-gray-600">x3</p>
-              <p className="text-gray-800 font-medium">$320</p>
-            </div>
-            <div className="flex justify-between">
-              <div>
-                <h5 className="text-gray-800 font-medium">
-                  Italian shape sofa
-                </h5>
-                <p className="text-sm text-gray-600">Size: M</p>
-              </div>
-              <p className="text-gray-600">x3</p>
-              <p className="text-gray-800 font-medium">$320</p>
-            </div>
-            <div className="flex justify-between">
-              <div>
-                <h5 className="text-gray-800 font-medium">
-                  Italian shape sofa
-                </h5>
-                <p className="text-sm text-gray-600">Size: M</p>
-              </div>
-              <p className="text-gray-600">x3</p>
-              <p className="text-gray-800 font-medium">$320</p>
-            </div>
-            <div className="flex justify-between">
-              <div>
-                <h5 className="text-gray-800 font-medium">
-                  Italian shape sofa
-                </h5>
-                <p className="text-sm text-gray-600">Size: M</p>
-              </div>
-              <p className="text-gray-600">x3</p>
-              <p className="text-gray-800 font-medium">$320</p>
-            </div>
+            {
+              cart?.data?.map((item,index)=>(
+                <div key={index}  className="flex justify-between">
+                  <div className="max-w-[170px] min-w-[170px]">
+                    <h5 className="text-gray-800 font-medium">
+                      {item?.title ?? "NA"}
+                    </h5>
+                    <p className="text-sm text-gray-600 ">Size: {item?.size ?? "NA"}</p>
+                  </div>
+                  <p className="text-gray-600 max-w-[20px] min-w-[20px]">x{item.quantity ?? 0}</p>
+                  <p className="text-gray-800 font-medium max-w-[70px] min-w-[70px] flex justify-end items-center">${item?.price ?? "NA"}</p>
+                </div>
+              ))
+            }
           </div>
 
           <div className="flex justify-between border-b border-gray-200 mt-1 text-gray-800 font-medium py-3 uppercas">
             <p>subtotal</p>
-            <p>$1280</p>
+            <p>$ {subTotal}</p>
           </div>
 
           <div className="flex justify-between border-b border-gray-200 mt-1 text-gray-800 font-medium py-3 uppercas">
@@ -173,7 +160,7 @@ const Checkout = () => {
 
           <div className="flex justify-between text-gray-800 font-medium py-3 uppercas">
             <p className="font-semibold">Total</p>
-            <p>$1280</p>
+            <p>$ {subTotal}</p>
           </div>
 
           <div className="flex items-center mb-4 mt-2">
@@ -202,7 +189,7 @@ const Checkout = () => {
           </a>
         </div>
       </div>
-    </body>
+    </div>
   );
 };
 

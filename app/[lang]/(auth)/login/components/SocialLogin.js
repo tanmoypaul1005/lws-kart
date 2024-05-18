@@ -13,9 +13,8 @@ const SocialLogin = () => {
           </Link>
           <div
             onClick={async () => {
-                console.log("google")
               await signIn("google", {
-                callbackUrl: "http://localhost:3000/en/product/1",
+                callbackUrl: process.env.NEXT_PUBLIC_BASE_URL,
               });
             }}
             className="w-1/2 py-2 text-sm font-medium text-center text-white uppercase bg-red-600 rounded cursor-pointer font-roboto hover:bg-red-500"

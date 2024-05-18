@@ -1,6 +1,7 @@
 export const dynamic = 'force-dynamic' 
 
 import Cart from "@/models/Cart";
+import { Product } from "@/models/Product";
 import { User } from "@/models/User";
 import connectMongo from "@/utils/db";
 
@@ -73,15 +74,17 @@ export async function GET(request) {
 
   const user = await User.findOne({email: email });
 
-  const cart = await Cart.findOne({user: user._id}).populate("cartItems.product");
+  const cart = await Cart.findOne({user: user._id}).populate("cartItems").populate("cartItems.product");
 
-  const data= cart.cartItems.map((item)=>({
-    _id: item.product._id,
-    name: item.product.name,
+  const data = cart.cartItems.map(item => ({
+    // product: item.product,
+    title:item?.product?.title,
+    sku:item?.product?.sku,
+    price: item?.product?.price,
+    category: item?.product?.category,
     quantity: item.quantity,
-    price: item.product.price,
-    image: item.product.image,
   }));
+  //console.log("data", data);
 
   return Response.json({
     status: 200,

@@ -7,6 +7,7 @@ import outdoorCafe from "../public/images/icons/outdoor-cafe.svg";
 import bed2 from "../public/images/icons/bed-2.svg";
 import Link from "next/link";
 import { auth } from "@/auth";
+import Logout from "./Logout";
 
 const NavBar = async () => {
   
@@ -112,8 +113,9 @@ const NavBar = async () => {
             </a>
           </div>
           {session ? (
-            <div>
+            <div className="flex space-x-3">
               <div className="text-gray-200">{session?.user?.name}</div>
+              <Logout />
             </div>
           ) : (
             <Link
