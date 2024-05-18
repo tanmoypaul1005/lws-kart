@@ -32,8 +32,8 @@ const Checkout = async () => {
         <div className="col-span-8 border border-gray-200 p-4 rounded">
           <h3 className="text-lg font-medium capitalize mb-4">Checkout</h3>
           <div className="space-y-4">
-            <CommonInput label="Name" />
-       
+            <CommonInput value={session?.user?.name} label="Name" />
+            <CommonInput disabled={true} value={session?.user?.email} label="Email address" />
             <div>
               <label for="region" className="text-gray-600">
                 Country/Region
@@ -59,7 +59,7 @@ const Checkout = async () => {
 
             <CommonInput label="City" />
             <CommonInput label="Phone number" />
-            <CommonInput label="Email address" />
+
 
             <CommonInput label="Company" />
           </div>
