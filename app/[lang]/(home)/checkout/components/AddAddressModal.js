@@ -13,7 +13,7 @@ const AddAddressModal = ({ open, setOpen }) => {
             <CommonInput label="Title" />
             <CommonInput label="Address" />
             <CommonInput label="Contact" />
-            <CommonInput label="District" />
+            {/* <CommonInput label="District" /> */}
             <CommonInput label="Postal Code" />
             <CommonInput label="House Name" />
           </div>

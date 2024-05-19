@@ -31,11 +31,6 @@ address:[
         trim: true,
       },
 
-      district: {
-        type: String,
-        required: true,
-        trim: true,
-      },
 
       house_name: {
         type: String,
