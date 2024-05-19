@@ -1,6 +1,7 @@
 import { getCart } from "@/app/actions";
 import { auth } from "@/auth";
 import CommonInput from "@/components/input/CommonInput";
+import Address from "./components/Address";
 
 const Checkout = async () => {
   const session = await auth();
@@ -33,35 +34,14 @@ const Checkout = async () => {
           <h3 className="text-lg font-medium capitalize mb-4">Checkout</h3>
           <div className="space-y-4">
             <CommonInput value={session?.user?.name} label="Name" />
-            <CommonInput disabled={true} value={session?.user?.email} label="Email address" />
-            <div>
-              <label for="region" className="text-gray-600">
-                Country/Region
-              </label>
-              <input
-                type="text"
-                name="region"
-                id="region"
-                className="input-box"
-              />
-            </div>
-            <div>
-              <label for="address" className="text-gray-600">
-                Street address
-              </label>
-              <input
-                type="text"
-                name="address"
-                id="address"
-                className="input-box"
-              />
-            </div>
-
-            <CommonInput label="City" />
+            <CommonInput
+              disabled={true}
+              value={session?.user?.email}
+              label="Email address"
+            />
             <CommonInput label="Phone number" />
 
-
-            <CommonInput label="Company" />
+            <Address />
           </div>
         </div>
 

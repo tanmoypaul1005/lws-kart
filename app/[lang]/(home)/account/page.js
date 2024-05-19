@@ -1,6 +1,6 @@
 const Account = () => {
   return (
-    <body>
+    <div>
       <div className="container py-4 flex items-center gap-3">
         <a href="../index.html" className="text-primary text-base">
           <i className="fa-solid fa-house"></i>
@@ -62,9 +62,10 @@ const Account = () => {
               <p className="text-gray-800">0811 8877 988</p>
             </div>
           </div>
+          
         </div>
       </div>
-    </body>
+    </div>
   );
 };
 
