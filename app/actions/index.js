@@ -30,3 +30,14 @@ export async function getCart(email = "") {
         return { error: error.message };
     }
 }
+
+export async function getAddress(email = "") {
+    try {
+        const res = await fetch(`${base_url}/address?email=${encodeURIComponent(email)}`);
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        console.log("error: ", error);
+        return { error: error.message };
+    }
+}

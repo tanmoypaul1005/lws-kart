@@ -50,3 +50,41 @@ export async function POST(request) {
     });
   }
 }
+
+export async function GET(request) {
+  try {
+    await connectMongo();
+    const searchParams = request.nextUrl.searchParams;
+    const email = searchParams.get("email");
+
+    const user=User.findOne({ email: email });
+
+    const address=Address.findOne({ user: user._id });  
+
+    if(!address){
+      return Response.json({
+        success: false,
+        status: 404,
+        message: "No address found",
+        data: null,
+      });
+    }else{
+      return Response.json({
+        success: true,
+        status: 200,
+        message: "Address found",
+        data: address,
+      });
+    
+    }
+  } catch (err) {
+    console.error(err);
+    return Response.json({
+      success: false,
+      status: 500,
+      message: "Internal Server Error",
+      data: null,
+    });
+  }
+}
+
