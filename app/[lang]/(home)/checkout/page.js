@@ -16,6 +16,8 @@ const Checkout = async () => {
     0
   );
 
+  // console.log("address",address)
+
   return (
     <div>
       <div className="container flex items-center gap-3 py-4">
@@ -40,7 +42,7 @@ const Checkout = async () => {
             />
             <CommonInput label="Phone number" />
 
-            <Address />
+            <Address address={address?.data} />
           </div>
         </div>
 

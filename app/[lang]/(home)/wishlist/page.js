@@ -3,25 +3,25 @@ import Image from "next/image";
 
 const WishList = () => {
   return (
-    <body>
-      <div className="container py-4 flex items-center gap-3">
-        <a href="../index.html" className="text-primary text-base">
+    <div>
+      <div className="container flex items-center gap-3 py-4">
+        <a href="../index.html" className="text-base text-primary">
           <i className="fa-solid fa-house"></i>
         </a>
         <span className="text-sm text-gray-400">
           <i className="fa-solid fa-chevron-right"></i>
         </span>
-        <p className="text-gray-600 font-medium">Profile</p>
+        <p className="font-medium text-gray-600">Profile</p>
       </div>
 
       <div className="container gap-6 pt-4 pb-16">
-        <div className="mx-auto space-y-4 max-w-6xl">
+        <div className="max-w-6xl mx-auto space-y-4">
         <Wish/>
         <Wish/>
         <Wish/>
         </div>
       </div>
-    </body>
+    </div>
   );
 };
 
@@ -29,7 +29,7 @@ export default WishList;
 
 const Wish = () => {
   return (
-    <div className="flex items-center justify-between border gap-6 p-4 border-gray-200 rounded">
+    <div className="flex items-center justify-between gap-6 p-4 border border-gray-200 rounded">
       <div className="w-28">
         <Image
           src={iProduct1}
@@ -38,15 +38,15 @@ const Wish = () => {
         />
       </div>
       <div className="w-1/3">
-        <h2 className="text-gray-800 text-xl font-medium uppercase">Sofa</h2>
-        <p className="text-gray-500 text-sm">
+        <h2 className="text-xl font-medium text-gray-800 uppercase">Sofa</h2>
+        <p className="text-sm text-gray-500">
           Availability: <span className="text-red-600">Out of Stock</span>
         </p>
       </div>
-      <div className="text-primary text-lg font-semibold">$320.00</div>
+      <div className="text-lg font-semibold text-primary">$320.00</div>
       <a
         href="#"
-        className="cursor-not-allowed px-6 py-2 text-center text-sm text-white bg-red-400 border border-red-400 rounded transition uppercase font-roboto font-medium"
+        className="px-6 py-2 text-sm font-medium text-center text-white uppercase transition bg-red-400 border border-red-400 rounded cursor-not-allowed font-roboto"
       >
         add to cart
       </a>

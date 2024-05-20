@@ -1,6 +1,8 @@
+export const dynamic = 'force-dynamic' 
 import connectMongo from "@/utils/db";
-import Address from "@/models/Address"; // Assuming you have an Address model
 import { User } from "@/models/User";
+import Address from "@/models/Address";
+
 
 export async function POST(request) {
   try {
@@ -56,26 +58,34 @@ export async function GET(request) {
     await connectMongo();
     const searchParams = request.nextUrl.searchParams;
     const email = searchParams.get("email");
-
-    const user=User.findOne({ email: email });
-
-    const address=Address.findOne({ user: user._id });  
-
-    if(!address){
+    
+    const user = await User.findOne({ email: email }).exec();
+    
+    if (!user) {
+      return Response.json({
+        success: false,
+        status: 404,
+        message: "User not found",
+        data: null,
+      });
+    }
+    
+    const address = await Address.findOne({ user: user._id }).exec();
+    
+    if (!address) {
       return Response.json({
         success: false,
         status: 404,
         message: "No address found",
         data: null,
       });
-    }else{
+    } else {
       return Response.json({
         success: true,
         status: 200,
         message: "Address found",
-        data: address,
+        data: address?.address,
       });
-    
     }
   } catch (err) {
     console.error(err);

@@ -26,24 +26,24 @@ const TopBar = ({ session }) => {
   };
 
   return (
-    <div className="py-4 shadow-sm bg-white">
+    <div className="py-4 bg-white shadow-sm">
       <div className="container flex items-center justify-between">
         <Link href="/">
           <Image src={iLogo} alt="Logo" className="w-32" />
         </Link>
 
-        <div className="w-full max-w-xl relative flex">
-          <span className="absolute left-4 top-3 text-lg text-gray-400">
+        <div className="relative flex w-full max-w-xl">
+          <span className="absolute text-lg text-gray-400 left-4 top-3">
             <i className="fa-solid fa-magnifying-glass"></i>
           </span>
           <input
             type="text"
             name="search"
             id="search"
-            className="w-full border border-primary  pl-3 py-3 pr-3 rounded focus:outline-none hidden md:flex"
+            className="hidden w-full py-3 pl-3 pr-3 border rounded border-primary focus:outline-none md:flex"
             placeholder="search"
           />
-          {/* <button className="bg-primary border border-primary text-white px-8 rounded-r-md hover:bg-transparent hover:text-primary transition hidden md:flex">
+          {/* <button className="hidden px-8 text-white transition border bg-primary border-primary rounded-r-md hover:bg-transparent hover:text-primary md:flex">
               Search
             </button> */}
         </div>
@@ -51,32 +51,32 @@ const TopBar = ({ session }) => {
         <div className="flex items-center space-x-4">
           <a
             href="#"
-            className="text-center text-gray-700 hover:text-primary transition relative"
+            className="relative text-center text-gray-700 transition hover:text-primary"
           >
             <div className="text-2xl">
               <i className="fa-regular fa-heart"></i>
             </div>
             <div className="text-xs leading-3">Wishlist</div>
-            <div className="absolute right-0 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
+            <div className="absolute right-0 flex items-center justify-center w-5 h-5 text-xs text-white rounded-full -top-1 bg-primary">
               8
             </div>
           </a>
           <Link
-            href="/en/cart"
-            className="text-center text-gray-700 hover:text-primary transition relative"
+            href="/en/checkout"
+            className="relative text-center text-gray-700 transition hover:text-primary"
           >
             <div className="text-2xl">
               <i className="fa-solid fa-bag-shopping"></i>
             </div>
             <div className="text-xs leading-3">Cart</div>
-            <div className="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
+            <div className="absolute flex items-center justify-center w-5 h-5 text-xs text-white rounded-full -right-3 -top-1 bg-primary">
               {totalCart}
             </div>
           </Link>
 
           <Link
             href="/en/account"
-            className="text-center text-gray-700 hover:text-primary transition relative"
+            className="relative text-center text-gray-700 transition hover:text-primary"
           >
             <div className="text-2xl">
               <i className="fa-regular fa-user"></i>
