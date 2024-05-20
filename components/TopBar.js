@@ -15,7 +15,7 @@ const TopBar = ({ session }) => {
     fetchData();
   }, [totalCart]);
 
-  console.log("totalCart", totalCart);
+
 
   const fetchData = async () => {
     if (session?.user?.email) {

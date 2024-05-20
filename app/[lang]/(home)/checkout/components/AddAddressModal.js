@@ -6,42 +6,45 @@ import React, { useEffect, useState } from "react";
 import { Toastr } from "@/utils/utilityFunctions";
 import { addAddress } from "@/app/actions";
 
-const AddAddressModal = ({ open, setOpen, type, email,editData }) => {
-  
+const AddAddressModal = ({ open, setOpen, type, email, editData }) => {
   const [title, setTitle] = useState("");
   const [address, setAddress] = useState("");
   const [contact, setContact] = useState("");
   const [postalCode, setPostalCode] = useState("");
   const [houseName, setHouseName] = useState("");
 
-  console.log("editData",editData)
+  // console.log("editData", editData);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const body={
+    const body = {
       email,
       title,
       address,
       contact,
       postalCode,
-      house_name:houseName,
+      house_name: houseName,
       address_type: type,
-      email
-    }
-    console.log("body",body)
+      email,
+    };
+    console.log("body", body);
 
-     const data = await addAddress(body);
+    const data = await addAddress(body);
     if (data.success) {
-      Toastr({message:data?.message,type:"success"})
+      Toastr({ message: data?.message, type: "success" });
       setOpen(false);
-    }else{
-      Toastr({message:data?.message,type:"error"})
+    } else {
+      Toastr({ message: data?.message, type: "error" });
     }
   };
 
   useEffect(() => {
-
-  }, [editData])
+    setTitle(editData?.title);
+    setAddress(editData?.address);
+    setContact(editData?.contact);
+    setPostalCode(editData?.postalCode);
+    setHouseName(editData?.house_name);
+  }, [editData]);
 
   return (
     <div>

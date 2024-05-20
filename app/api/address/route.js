@@ -17,6 +17,7 @@ import Address from "@/models/Address";
 //     const address=body.address
 //     const house_name=body.house_name
 //     const address_type=body.address_type
+//     const address_id=body.address_id
 
 //     const user_info= await User.findOne({ email: email });
 
@@ -79,8 +80,8 @@ export async function POST(request) {
       userAddress = new Address({ user, address: [] });
     }
 
-    // Check if an address with the provided title already exists
-    const existingAddressIndex = userAddress.address.findIndex(addr => addr.title === title);
+    // Check if an address of the provided type already exists
+    const existingAddressIndex = userAddress.address.findIndex(addr => addr.address_type === address_type);
 
     if (existingAddressIndex !== -1) {
       // If it does, update the existing address
@@ -109,6 +110,7 @@ export async function POST(request) {
     });
   }
 }
+
 
 export async function GET(request) {
   try {
