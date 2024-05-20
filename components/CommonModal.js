@@ -14,7 +14,8 @@ export default function CommonModal({ open, setOpen, body = <></>,title="Add Add
     bgcolor: "background.paper",
     // border: '2px solid #000',
     boxShadow: 24,
-    p: 2,
+    borderRadius: 2,
+    p: 3,
   };
 
   return (
@@ -26,7 +27,7 @@ export default function CommonModal({ open, setOpen, body = <></>,title="Add Add
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-            <div className="text-center mb-5 text-[20px] font-bold">{title}</div>
+            <div className="text-center mb-3 text-[20px] font-bold">{title}</div>
             {body}</Box>
       </Modal>
     </div>

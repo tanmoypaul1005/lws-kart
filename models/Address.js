@@ -15,7 +15,7 @@ address:[
       },
 
       contact: {
-        type: Number,
+        type: String,
         required: true,
         trim: true,
       },

@@ -1,7 +1,5 @@
 export const dynamic = 'force-dynamic' 
-
 import Cart from "@/models/Cart";
-import { Product } from "@/models/Product";
 import { User } from "@/models/User";
 import connectMongo from "@/utils/db";
 
