@@ -2,11 +2,10 @@ import { getAddress, getCart } from "@/app/actions";
 import { auth } from "@/auth";
 import CommonInput from "@/components/input/CommonInput";
 import Address from "./components/Address";
+import Action from "./components/Action";
 
 const Checkout = async () => {
   const session = await auth();
-
-  // console.log("session", session);
 
   const cart = await getCart(session?.user?.email);
   const address = await getAddress(session?.user?.email);
@@ -15,8 +14,6 @@ const Checkout = async () => {
     (total, item) => total + item?.price * item?.quantity,
     0
   );
-
-  // console.log("address",address)
 
   return (
     <div>
@@ -40,7 +37,6 @@ const Checkout = async () => {
               value={session?.user?.email}
               label="Email address"
             />
-            <CommonInput label="Phone number" />
 
             <Address email={session?.user?.email} address={address?.data} />
           </div>
@@ -103,13 +99,7 @@ const Checkout = async () => {
               </a>
             </label>
           </div>
-
-          <a
-            href="#"
-            className="block w-full px-4 py-3 font-medium text-center text-white transition border rounded-md bg-primary border-primary hover:bg-transparent hover:text-primary"
-          >
-            Place order
-          </a>
+          <Action  session={session} total={subTotal} />
         </div>
       </div>
     </div>

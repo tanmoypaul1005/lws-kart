@@ -27,7 +27,7 @@ const AddAddressModal = ({ open, setOpen, type, email, editData }) => {
       address_type: type,
       email,
     };
-    console.log("body", body);
+    
 
     const data = await addAddress(body);
     if (data.success) {
