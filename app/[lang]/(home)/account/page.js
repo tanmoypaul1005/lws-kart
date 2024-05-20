@@ -1,4 +1,12 @@
-const Account = () => {
+import { getAddress } from "@/app/actions";
+import Address from "../checkout/components/Address";
+import { auth } from "@/auth";
+
+const Account = async() => {
+
+  const session = await auth();
+  const address = await getAddress(session?.user?.email);
+
   return (
     <div>
       <div className="container py-4 flex items-center gap-3">
@@ -11,10 +19,10 @@ const Account = () => {
         <p className="text-gray-600 font-medium">Account</p>
       </div>
 
-      <div className="container  items-start gap-6 pt-4 pb-16">
-        <div className=" grid grid-cols-3 gap-4 mx-auto max-w-5xl">
-          <div className="shadow rounded bg-white px-4 pt-6 pb-8">
-            <div className="flex items-center justify-between mb-4">
+      <div className="container  items-start  pt-4 pb-16">
+        <div className="flex">
+          <div className="px-4 pt-6 pb-8 grid max-w-5xl bg-white border border-gray-200 rounded shadow">
+            <div className="flex space-x-[120px] items-center justify-between mb-4">
               <h3 className="font-medium text-gray-800 text-lg">
                 Personal Profile
               </h3>
@@ -29,40 +37,7 @@ const Account = () => {
             </div>
           </div>
 
-          <div className="shadow rounded bg-white px-4 pt-6 pb-8">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="font-medium text-gray-800 text-lg">
-                Shipping address
-              </h3>
-              <a href="#" className="text-primary">
-                Edit
-              </a>
-            </div>
-            <div className="space-y-1">
-              <h4 className="text-gray-700 font-medium">John Doe</h4>
-              <p className="text-gray-800">Medan, North Sumatera</p>
-              <p className="text-gray-800">20371</p>
-              <p className="text-gray-800">0811 8877 988</p>
-            </div>
-          </div>
-
-          <div className="shadow rounded bg-white px-4 pt-6 pb-8">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="font-medium text-gray-800 text-lg">
-                Billing address
-              </h3>
-              <a href="#" className="text-primary">
-                Edit
-              </a>
-            </div>
-            <div className="space-y-1">
-              <h4 className="text-gray-700 font-medium">John Doe</h4>
-              <p className="text-gray-800">Medan, North Sumatera</p>
-              <p className="text-gray-800">20317</p>
-              <p className="text-gray-800">0811 8877 988</p>
-            </div>
-          </div>
-          
+          <Address email={session?.user?.email} address={address?.data} />
         </div>
       </div>
     </div>

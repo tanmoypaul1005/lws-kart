@@ -24,6 +24,7 @@ const Address = ({ address,email }) => {
         <div className="flex items-center justify-center">
           {billing_address?.title ? (
             <AddressCard 
+            onOpen={() => setAddressModal(true)}
             title="Billing address"
             address={billing_address} />
           ) : (
@@ -41,6 +42,7 @@ const Address = ({ address,email }) => {
 
         {shipping_address?.title ? (
           <AddressCard 
+          onOpen={() => setAddressModal(true)}
           title="Shipping address"
           address={shipping_address} />
         ) : (
@@ -62,6 +64,7 @@ const Address = ({ address,email }) => {
         open={showAddAddressModal}
         setOpen={setAddressModal}
         onClose={() => setAddressModal(false)}
+        // editData={selectType === address_type.shipping_address  ? shipping_address : billing_address}
       />
     </>
   );

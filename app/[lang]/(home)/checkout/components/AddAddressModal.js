@@ -2,30 +2,46 @@
 import CommonButton from "@/components/CommonButton";
 import CommonModal from "@/components/CommonModal";
 import CommonInput from "@/components/input/CommonInput";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Toastr } from "@/utils/utilityFunctions";
+import { addAddress } from "@/app/actions";
 
-const AddAddressModal = ({ open, setOpen, type,email }) => {
+const AddAddressModal = ({ open, setOpen, type, email,editData }) => {
+  
   const [title, setTitle] = useState("");
   const [address, setAddress] = useState("");
   const [contact, setContact] = useState("");
   const [postalCode, setPostalCode] = useState("");
   const [houseName, setHouseName] = useState("");
 
-  const handleSubmit=async(e)=>{
-   e.eventDefault();
-   const response = await fetch(
-    process.env.NEXT_PUBLIC_BASE_URL + "api/address",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({email, title, address, contact, postalCode, houseName, address_type:type}),
-    }
-  );
+  console.log("editData",editData)
 
-  const data = await response.json();
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const body={
+      email,
+      title,
+      address,
+      contact,
+      postalCode,
+      house_name:houseName,
+      address_type: type,
+      email
+    }
+    console.log("body",body)
+
+     const data = await addAddress(body);
+    if (data.success) {
+      Toastr({message:data?.message,type:"success"})
+      setOpen(false);
+    }else{
+      Toastr({message:data?.message,type:"error"})
+    }
+  };
+
+  useEffect(() => {
+
+  }, [editData])
 
   return (
     <div>
@@ -35,26 +51,31 @@ const AddAddressModal = ({ open, setOpen, type,email }) => {
         body={
           <form onSubmit={handleSubmit} className="space-y-4">
             <CommonInput
+              required={true}
               label="Title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
             <CommonInput
+              required={true}
               label="Address"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
             />
             <CommonInput
+              required={true}
               label="Contact"
               value={contact}
               onChange={(e) => setContact(e.target.value)}
             />
             <CommonInput
+              required={true}
               label="Postal Code"
               value={postalCode}
               onChange={(e) => setPostalCode(e.target.value)}
             />
             <CommonInput
+              required={true}
               label="House Name"
               value={houseName}
               onChange={(e) => setHouseName(e.target.value)}

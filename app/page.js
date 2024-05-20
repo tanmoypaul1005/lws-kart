@@ -20,9 +20,9 @@ export default function Home() {
       <NewArrival />
 
       <div className="container pb-16">
-        <a href="#">
+        {/* <a href="#">
           <img src="assets/images/offer.jpg" alt="ads" className="w-full" />
-        </a>
+        </a> */}
       </div>
 
       <Trending/>

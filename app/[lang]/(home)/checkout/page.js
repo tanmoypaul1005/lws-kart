@@ -42,7 +42,7 @@ const Checkout = async () => {
             />
             <CommonInput label="Phone number" />
 
-            <Address email={session?.email} address={address?.data} />
+            <Address email={session?.user?.email} address={address?.data} />
           </div>
         </div>
 

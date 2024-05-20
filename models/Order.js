@@ -1,22 +1,20 @@
 import mongoose, { Schema } from "mongoose";
 
-const  orderSchema = new Schema(  {
+const  orderSchema = new Schema({
+
   user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-  // Address: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "Address",
-  //   required: true,
-  // },
+  
+  address: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Address",
+    required: true,
+  },
   totalAmount: { type: Number, required: true },
   items: [
     {
-      productId: {
+      product_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Product",
-      },
-      payablePrice: {
-        type: Number,
-        required: true,
       },
       purchasedQty: {
         type: Number,
@@ -28,28 +26,18 @@ const  orderSchema = new Schema(  {
     type: String,
     enum: ["pending", "completed", "cancelled", "refund"],
     required: true,
+    default: "pending",
   },
-  paymentType: {
+  order_status:{
     type: String,
-    enum: ["cash", "card","bkash"],
+    enum: ["ordered", "packed", "shipped", "delivered"],
     required: true,
+    default: "ordered",
   },
-  orderStatus: [
-    {
-      type: {
-        type: String,
-        enum: ["ordered", "packed", "shipped", "delivered"],
-        default: "ordered",
-      },
-      date: {
-        type: Date,
-      },
-      isCompleted: {
-        type: Boolean,
-        default: false,
-      },
-    },
-  ],
+  isCompleted: {
+    type: Boolean,
+    default: false,
+  },
 },);
 
 export const Order =
