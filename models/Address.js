@@ -1,3 +1,5 @@
+import { address_type } from '@/utils/const';
+
 const mongoose=require('mongoose');
 
 const addressSchema=new mongoose.Schema({
@@ -43,7 +45,7 @@ address:[
       address_type: {
         type: String,
         required: true,
-        enum: ["shipping_address", "billing_address"],
+        enum: [address_type.shipping_address, address_type.billing_address],
         required: true,
       },
     }

@@ -17,3 +17,8 @@ export const products_type_value = {
     products_type_value.regular,
     products_type_value.popular,
   ];
+
+  export const address_type = {
+    shipping_address:"shipping_address",
+    billing_address:"billing_address"
+  }
