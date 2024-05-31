@@ -8,6 +8,7 @@ import bed2 from "../public/images/icons/bed-2.svg";
 import Link from "next/link";
 import { auth } from "@/auth";
 import Logout from "./Logout";
+import NavLogin from "./NavLogin";
 
 const NavBar = async () => {
   
@@ -118,12 +119,7 @@ const NavBar = async () => {
               <Logout />
             </div>
           ) : (
-            <Link
-              href="/en/login"
-              className="text-gray-200 hover:text-white transition"
-            >
-              Login
-            </Link>
+<NavLogin/>
           )}
         </div>
       </div>
